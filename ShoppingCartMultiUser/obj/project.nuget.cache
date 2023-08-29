@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "4PjiOM1eB/HNNM4AFG/SMIhsH0eKle9dMo53A5icAqy30sBXtLqCbUiK7MNEccUcUf62zo47mDOJhijht+qq7A==",
+  "success": true,
+  "projectFilePath": "D:\\Projects\\ShoppingCartMultiUser\\ShoppingCartTCPIPConnectionProjectCustomCommandParser\\ShoppingCartMultiUser\\ShoppingCartMultiUser\\ShoppingCartMultiUser.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\LocalUser\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
