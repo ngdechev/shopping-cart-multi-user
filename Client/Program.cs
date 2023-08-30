@@ -9,8 +9,8 @@ namespace TCPClientApp
         static void Main(string[] args)
         {
             TcpClient client = new TcpClient();
-            //client.Connect("localhost", 12345); // Replace with the server's IP and port
-            client.Connect("172.20.80.37", 12345);
+            client.Connect("localhost", 12345); // Replace with the server's IP and port
+            //client.Connect("172.20.80.37", 12345);
             NetworkStream stream = client.GetStream();
             byte[] buffer = new byte[1024];
             bool run = true;

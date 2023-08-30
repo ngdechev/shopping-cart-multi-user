@@ -1,7 +1,7 @@
 ﻿using ShoppingCartMultiUser.services;
 using ShoppingCartMultiUser.utils;
 
-namespace ShoppingCartMultiUser.commands.admin
+namespace ShoppingCartMultiUser.commands.none
 {
     [AllowedRoles(UserRole.Admin, UserRole.Customer, UserRole.StorehouseWorker, UserRole.None)]
     internal class ExitCommand : ICommand

@@ -32,12 +32,12 @@ namespace ShoppingCartMultiUser
                     {
                         string[] args = arguments.Split(';');
 
-                        command.Value.Execute(args);
-
-                        msg = "Command executed successfully!";
+                        msg = command.Value.Execute(args);
+                        break;
+                        //msg = "Command executed successfully!";
                     }
                     else
-                        msg = "You do not have permission to execute this command!";
+                        msg = "You don't have permission to execute this command!";
                 }
                 else
                     msg = "Command not found!";

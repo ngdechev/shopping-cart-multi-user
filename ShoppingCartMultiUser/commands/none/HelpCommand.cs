@@ -1,5 +1,4 @@
 ﻿using ShoppingCartMultiUser.services;
-using ShoppingCartMultiUser.utils;
 using System.Reflection;
 using System.Text;
 
@@ -21,12 +20,11 @@ namespace ShoppingCartMultiUser.commands.none
             foreach (var kvp in CommandParser.GetCommands())
             {
                 var command = kvp.Value;
-                var allowedRolesAttribute = command.GetType().GetCustomAttribute<AllowedRolesAttribute>();
+                var allowedRolesAttribute = 
+                    command.GetType().GetCustomAttribute<AllowedRolesAttribute>();
 
                 if (allowedRolesAttribute != null && allowedRolesAttribute.Roles.Contains(_application.GetRole()))
-                {
                     helpMessage.AppendLine($"[{kvp.Key}]: {command.GetHelp()}");
-                }
             }
 
             return helpMessage.ToString();

@@ -1,5 +1,8 @@
 ﻿using ShoppingCartMultiUser.commands.admin;
+using ShoppingCartMultiUser.commands.customer;
+using ShoppingCartMultiUser.commands.none;
 using ShoppingCartMultiUser.entity;
+using ShoppingCartMultiUser.server;
 using ShoppingCartMultiUser.services;
 using ShoppingCartMultiUser.utils;
 
@@ -13,15 +16,19 @@ namespace ShoppingCartMultiUser
         //private List<CommandItem> _commands = new();
         private UserRole _role = UserRole.None;
         private List<UserRole> _userRoles = new();
-        private List<Product> _products = new();    
-        private List<CartItem> _cartItems = new();
+        private List<Product> _products = new();
+        private List<CartItem> _shoppingCart;
         private string _filePath = string.Empty;
         private Dictionary<uint, List<Product>> _shoppingCartMap = new();
+        private ClientContainer _clientContainer;
 
         public Application()
         {
             _databaseService = new ProductDatabaseService(this);
             _shoppingCartService = new ShoppingCartService(this);
+            _clientContainer = new(this);
+
+            _shoppingCart = _clientContainer.GetShoppingCartProducts(); 
         }
 
         public void Exit()
@@ -86,8 +93,8 @@ namespace ShoppingCartMultiUser
             return _products;
         }
 
-        public List<CartItem> GetCartItems() {
-            return _cartItems;
+        public List<CartItem> GetShoppingCart() {
+            return _shoppingCart;
         }
 
         public Dictionary<uint, List<Product>> GetShoppingCartMap(uint id)
@@ -101,12 +108,25 @@ namespace ShoppingCartMultiUser
         }
         public string Run(string input)
         {
+            // Admin commands
             CommandParser.RegisterCommand("AddProduct", new AddProductCommand(this));
             CommandParser.RegisterCommand("DeleteProduct", new AddProductCommand(this));
             CommandParser.RegisterCommand("EditProduct", new AddProductCommand(this));
             CommandParser.RegisterCommand("ListProduct", new ListProductsCommand(this));
+            
+            // Customer Commands
+            CommandParser.RegisterCommand("AddCartItem", new AddCartItemCommand(this));
+            CommandParser.RegisterCommand("RemoveCartItem", new RemoveCartItemCommand(this));
+            CommandParser.RegisterCommand("UpdateCartItemQuantity", new UpdateCartItemQuantityCommand(this));
+            CommandParser.RegisterCommand("ListCartItems", new ListCartItemsCommand(this));
+
+            // None role commands
             CommandParser.RegisterCommand("Exit", new ExitCommand(this));
+            CommandParser.RegisterCommand("Help", new HelpCommand(this));
             CommandParser.RegisterCommand("Login", new LoginCommand(this));
+
+            // Other commands - WarehouseWorker role
+            //CommandParser.RegisterCommand("UpdateQuantity", new UpdateQuantityCommand(this));
 
             Console.Write("> ");
             return CommandParser.ParseCommands(GetRole(), input);

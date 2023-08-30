@@ -6,11 +6,13 @@ namespace ShoppingCartMultiUser.services
     {
         private Application _app;
         private List<CartItem> _cartItems;
+        private int _clientId;
 
-        public ShoppingCartService(Application app)
+        public ShoppingCartService(Application app, int clientId)
         {
             _app = app;
-            _cartItems = _app.GetCartItems();
+            _cartItems = new List<CartItem>();
+            _clientId = clientId;
         }
 
         public string AddCartItem(int productId, int productQuantity)
@@ -24,7 +26,7 @@ namespace ShoppingCartMultiUser.services
 
         public string RemoveCartItem(int cartItemId)
         {
-            CartItem? cartItem = GetCartItemById(cartItemId);
+            CartItem cartItem = GetCartItemById(cartItemId);
             Product product = GetProductById(cartItemId);
 
             if (cartItem == null)
@@ -49,8 +51,8 @@ namespace ShoppingCartMultiUser.services
 
         public string ListCartItems()
         {
-            foreach (CartItem cartItem in _app.GetCartItems())
-                if (_app.GetCartItems().Count != 0)
+            foreach (CartItem cartItem in _cartItems)
+                if (_cartItems.Count != 0)
                     return cartItem.ToString();
 
             return "The product list is empty!";
@@ -70,7 +72,7 @@ namespace ShoppingCartMultiUser.services
 
         private CartItem GetCartItemById(int cartItemId)
         {
-            CartItem? cartItem = _app.GetCartItems().Find(c => c.Id == cartItemId);
+            CartItem? cartItem = _cartItems.Find(c => c.Id == cartItemId);
 
             return cartItem;
         }

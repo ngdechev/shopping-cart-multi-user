@@ -25,8 +25,9 @@ namespace ShoppingCartMultiUser
         {
             while(true)
             {
-                    byte[] buffer = new byte[1024];
-                    int bytesRead = _stream.Read(buffer, 0, buffer.Length);
+                byte[] buffer = new byte[1024];
+                int bytesRead;
+                
                 try { 
                     while((bytesRead = _stream.Read(buffer, 0, buffer.Length)) > 0)
                     {
@@ -57,7 +58,7 @@ namespace ShoppingCartMultiUser
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Client disconnected: {ex.Message}");
+                    Console.WriteLine(ex.Message);
 
                     //Disconnect();
                 }

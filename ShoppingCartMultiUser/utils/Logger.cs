@@ -46,7 +46,7 @@ namespace ShoppingCartMultiUser.utils
         {
             var timestamp = DateTime.Now;
 
-            Console.WriteLine($"[{timestamp.ToString()}][{severity}] {msg}");
+            Console.WriteLine($"[{timestamp}] [{severity}] {msg}");
         }
     }
 }
