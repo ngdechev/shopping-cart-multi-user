@@ -1,6 +1,6 @@
 ﻿using ShoppingCartMultiUser.commands;
+using ShoppingCartMultiUser.server;
 using ShoppingCartMultiUser.services;
-using ShoppingCartMultiUser.utils;
 using System.Reflection;
 
 namespace ShoppingCartMultiUser
@@ -9,12 +9,7 @@ namespace ShoppingCartMultiUser
     {
         private static Dictionary<string, ICommand> _commands = new Dictionary<string, ICommand>();
 
-        public static void RegisterCommand(string commandName, ICommand command)
-        {
-            _commands[commandName] = command;
-        }
-
-        public static string ParseCommands(UserRole userRole, string input)
+        public static string ParseCommands(string input, ClientContainer clientContainer)
         {
             string[] commandParts = input.Split('(');
             string commandName = commandParts[0], 
@@ -28,13 +23,12 @@ namespace ShoppingCartMultiUser
                     AllowedRolesAttribute? allowedRolesAttribute =
                             command.Value.GetType().GetCustomAttribute<AllowedRolesAttribute>();
 
-                    if (allowedRolesAttribute == null || allowedRolesAttribute.Roles.Contains(userRole))
+                    if (allowedRolesAttribute == null || allowedRolesAttribute.Roles.Contains(clientContainer.GetUserRole()))
                     {
                         string[] args = arguments.Split(';');
 
-                        msg = command.Value.Execute(args);
+                        msg = command.Value.Execute(args, clientContainer);
                         break;
-                        //msg = "Command executed successfully!";
                     }
                     else
                         msg = "You don't have permission to execute this command!";
@@ -42,13 +36,17 @@ namespace ShoppingCartMultiUser
                 else
                     msg = "Command not found!";
             }
-
             return msg;
         }
 
         public static Dictionary<string, ICommand> GetCommands()
         {
             return _commands;
+        }
+
+        public static void SetCommands(Dictionary<string, ICommand> commands)
+        {
+            _commands = commands;
         }
     }
 }

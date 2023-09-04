@@ -4,36 +4,50 @@ using ShoppingCartMultiUser.commands.none;
 using ShoppingCartMultiUser.entity;
 using ShoppingCartMultiUser.server;
 using ShoppingCartMultiUser.services;
-using ShoppingCartMultiUser.utils;
 
 namespace ShoppingCartMultiUser
 {
     internal class Application : IApplication
     {
-        //private EventWaitHandle _closeApp = new(false, EventResetMode.ManualReset);
-        private IDatabaseService _databaseService;
-        private IShoppingCartService _shoppingCartService;
-        //private List<CommandItem> _commands = new();
-        private UserRole _role = UserRole.None;
-        private List<UserRole> _userRoles = new();
+        private EventWaitHandle _closeApp = new(false, EventResetMode.ManualReset);
+        private ProductDatabaseService _databaseService;
+        private ShoppingCartService _shoppingCartService;
         private List<Product> _products = new();
-        private List<CartItem> _shoppingCart;
         private string _filePath = string.Empty;
-        private Dictionary<uint, List<Product>> _shoppingCartMap = new();
-        private ClientContainer _clientContainer;
 
-        public Application()
+        private static Dictionary<string, ICommand> _commands;
+
+        public Application()//(ClientContainer clientContainer)
         {
-            _databaseService = new ProductDatabaseService(this);
-            _shoppingCartService = new ShoppingCartService(this);
-            _clientContainer = new(this);
+            _databaseService = new(this);
+            //_shoppingCartService = new();
+            //_clientContainer = clientContainer;
+            _shoppingCartService = new(this);
 
-            _shoppingCart = _clientContainer.GetShoppingCartProducts(); 
+            _commands = new()
+            {
+                { "AddProduct", new AddProductCommand(this) },
+                { "DeleteProduct", new AddProductCommand(this) },
+                { "EditProduct", new AddProductCommand(this) },
+                { "ListProduct", new ListProductsCommand(this) },
+
+                // Customer Commands
+                { "AddCartItem", new AddCartItemCommand(this) },
+                { "RemoveCartItem", new RemoveCartItemCommand(this) },
+                { "UpdateCartItemQuantity", new UpdateCartItemQuantityCommand(this) },
+                { "ListCartItems", new ListCartItemsCommand(this) },
+
+                // None role commands
+                { "Exit", new ExitCommand(this) },
+                { "Help", new HelpCommand(this) },
+                { "Login", new LoginCommand(this) }
+            };
+            CommandParser.SetCommands(_commands);
         }
 
         public void Exit()
         {
-            //_closeApp.Set();
+            _closeApp.Set();
 
             _databaseService.Cleanup();
 
@@ -48,34 +62,6 @@ namespace ShoppingCartMultiUser
         public IShoppingCartService GetShoppingCartService()
         {
             return _shoppingCartService;
-        }
-
-        /*
-         public List<CommandItem> GetCommands()
-        {
-            return _commands;
-        }
-         */
-        public UserRole GetRole()
-        {
-            return _role;
-        }
-
-        public string SetRole(UserRole role)
-        {
-            _role = role;
-
-            return $"Role is set to {_role}";
-        }
-
-        public List<UserRole> GetUserRoles()
-        {
-            return _userRoles;
-        }
-
-        UserRole IApplication.GetRole()
-        {
-            throw new NotImplementedException();
         }
 
         public string GetFilePath()
@@ -93,43 +79,9 @@ namespace ShoppingCartMultiUser
             return _products;
         }
 
-        public List<CartItem> GetShoppingCart() {
-            return _shoppingCart;
-        }
-
-        public Dictionary<uint, List<Product>> GetShoppingCartMap(uint id)
-        {            
-            return _shoppingCartMap;
-        }
-
-        public void PrintMessage(string msg)
+        public Dictionary<string, ICommand> GetCommands()
         {
-            Console.WriteLine(msg);
-        }
-        public string Run(string input)
-        {
-            // Admin commands
-            CommandParser.RegisterCommand("AddProduct", new AddProductCommand(this));
-            CommandParser.RegisterCommand("DeleteProduct", new AddProductCommand(this));
-            CommandParser.RegisterCommand("EditProduct", new AddProductCommand(this));
-            CommandParser.RegisterCommand("ListProduct", new ListProductsCommand(this));
-            
-            // Customer Commands
-            CommandParser.RegisterCommand("AddCartItem", new AddCartItemCommand(this));
-            CommandParser.RegisterCommand("RemoveCartItem", new RemoveCartItemCommand(this));
-            CommandParser.RegisterCommand("UpdateCartItemQuantity", new UpdateCartItemQuantityCommand(this));
-            CommandParser.RegisterCommand("ListCartItems", new ListCartItemsCommand(this));
-
-            // None role commands
-            CommandParser.RegisterCommand("Exit", new ExitCommand(this));
-            CommandParser.RegisterCommand("Help", new HelpCommand(this));
-            CommandParser.RegisterCommand("Login", new LoginCommand(this));
-
-            // Other commands - WarehouseWorker role
-            //CommandParser.RegisterCommand("UpdateQuantity", new UpdateQuantityCommand(this));
-
-            Console.Write("> ");
-            return CommandParser.ParseCommands(GetRole(), input);
+            return _commands;
         }
     }
 }

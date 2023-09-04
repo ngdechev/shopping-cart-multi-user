@@ -1,4 +1,5 @@
-﻿using ShoppingCartMultiUser.services;
+﻿using ShoppingCartMultiUser.server;
+using ShoppingCartMultiUser.services;
 using ShoppingCartMultiUser.utils;
 
 namespace ShoppingCartMultiUser.commands.customer
@@ -13,7 +14,7 @@ namespace ShoppingCartMultiUser.commands.customer
             _application = application;
         }
 
-        public string Execute(string[] args)
+        public string Execute(string[] args, ClientContainer clientContainer)
         {
             if (args.Length < 1) 
                 return ($"Invalid number of arguments. Usage: {GetHelp()}");
@@ -23,7 +24,7 @@ namespace ShoppingCartMultiUser.commands.customer
             if (!int.TryParse(args[0].Trim(), out int parsedProductId) || productId < 0)
                 return "Invalid product id or product id is less than 0!";
 
-            return _application.GetShoppingCartService().RemoveCartItem(parsedProductId);
+            return _application.GetShoppingCartService().RemoveCartItem(clientContainer.GetClientId(), parsedProductId);
         }
 
         public string GetHelp()

@@ -5,22 +5,36 @@ namespace ShoppingCartMultiUser.server
 {
     internal class ClientContainer
     {
-        private List<CartItem>? _shoppingCartProducts;
-        private UserRole _currentRole;
+        private List<CartItem>? _shoppingCart;
+        private UserRole _currentRole = UserRole.None;
+        private int _clientId = 0;
 
-        public ClientContainer(Application application)
+        public ClientContainer(int clientId)
         {
-            _shoppingCartProducts = new List<CartItem>();
-            _currentRole = application.GetRole();
+            _shoppingCart = new();
+            
+            _clientId = clientId;
         }
 
-        public List<CartItem> GetShoppingCartProducts()
+        public List<CartItem> GetShoppingCart()
         {
-            return _shoppingCartProducts;
+            return _shoppingCart;
+        }
+
+        public string SetUserRole(UserRole role)
+        {
+            _currentRole = role;
+
+            return $"Role is set to {_currentRole}!";
         }
 
         public UserRole GetUserRole() { 
             return _currentRole;
+        }
+
+        public int GetClientId()
+        {
+            return _clientId;
         }
     }
 }

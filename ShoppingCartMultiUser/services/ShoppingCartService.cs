@@ -1,4 +1,5 @@
 ﻿using ShoppingCartMultiUser.entity;
+using ShoppingCartMultiUser.server;
 
 namespace ShoppingCartMultiUser.services
 {
@@ -6,25 +7,32 @@ namespace ShoppingCartMultiUser.services
     {
         private Application _app;
         private List<CartItem> _cartItems;
-        private int _clientId;
+        private List<ClientContainer> _clientContainers;
 
-        public ShoppingCartService(Application app, int clientId)
+        public ShoppingCartService(Application app)
         {
             _app = app;
-            _cartItems = new List<CartItem>();
-            _clientId = clientId;
+            _clientContainers = new List<ClientContainer>();    
         }
 
-        public string AddCartItem(int productId, int productQuantity)
+        public string AddCartItem(int client_id,int productId, int productQuantity)
         {
             Product? product = GetProductById(productId);
 
-            _cartItems.Add(new CartItem(productId, productQuantity));
-            
-            return $"[{product.Name}] was added to the shopping cart!";
+            foreach(var c in _clientContainers) 
+            {
+                if(c.GetClientId() == client_id)
+                {
+                    c.GetShoppingCart().Add(new CartItem(productId, productQuantity));
+
+                    return $"[{product.Name}] was added to the shopping cart!";
+                }
+            }
+
+            return $"There was a problem adding [{product.Name}] to the shopping cart!";
         }
 
-        public string RemoveCartItem(int cartItemId)
+        public string RemoveCartItem(int client_id, int cartItemId)
         {
             CartItem cartItem = GetCartItemById(cartItemId);
             Product product = GetProductById(cartItemId);
@@ -32,7 +40,13 @@ namespace ShoppingCartMultiUser.services
             if (cartItem == null)
                 return $"Product with id [{cartItemId}] in shopping cart cannot be found!";
 
-            _cartItems.Remove(cartItem);
+            foreach (var c in _clientContainers)
+            {
+                if (c.GetClientId() == client_id)
+                {
+                    c.GetShoppingCart().Remove(cartItem);
+                }
+            }
 
             return $"[{product.Name}] was removed from shopping cart!";
         }
@@ -49,11 +63,22 @@ namespace ShoppingCartMultiUser.services
             return $"Quantity of [{product.Name}] was updated to {newQuantity}!";
         }
 
-        public string ListCartItems()
+        public string ListCartItems(int client_id)
         {
             foreach (CartItem cartItem in _cartItems)
                 if (_cartItems.Count != 0)
                     return cartItem.ToString();
+
+            foreach (var c in _clientContainers)
+            {
+                if (c.GetClientId() == client_id)
+                {
+                   if(c.GetShoppingCart().Count != 0)
+                    {
+                        return c.GetShoppingCart().ToString();
+                    }
+                }
+            }
 
             return "The product list is empty!";
         }
@@ -61,6 +86,16 @@ namespace ShoppingCartMultiUser.services
         public string Checkout()
         {
             throw new NotImplementedException(); 
+        }
+
+        public void AddNewClientContainer( ClientContainer clientContainer)
+        {
+            _clientContainers.Add(clientContainer);
+        }
+
+        public List<CartItem> GetCartItems()
+        {
+            return _cartItems;
         }
 
         private Product GetProductById(int productId)
@@ -76,5 +111,17 @@ namespace ShoppingCartMultiUser.services
 
             return cartItem;
         }
+        public ClientContainer GetClientContainer(int clientId)
+        {
+            foreach(ClientContainer clientContainer in _clientContainers)
+            {
+                if(clientId == clientContainer.GetClientId())
+                {
+                    return clientContainer;
+                }
+            }
+            return null;
+        }
+        
     }
 }

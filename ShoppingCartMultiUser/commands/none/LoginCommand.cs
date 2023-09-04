@@ -1,4 +1,5 @@
-﻿using ShoppingCartMultiUser.services;
+﻿using ShoppingCartMultiUser.server;
+using ShoppingCartMultiUser.services;
 using ShoppingCartMultiUser.utils;
 
 namespace ShoppingCartMultiUser.commands.none
@@ -13,22 +14,19 @@ namespace ShoppingCartMultiUser.commands.none
             _application = application;
         }
 
-        public string Execute(string[] args)
+        public string Execute(string[] args, ClientContainer clientContainer)
         {
             UserRole role = (UserRole)Enum.Parse(typeof(UserRole), args[0]);
 
             if (string.IsNullOrEmpty(args[0]))
                 return $"Please provide a valid user role! Usage: {GetHelp()}";
 
-            //if (!_application.GetUserRoles().Contains(role))
-            //  return $"The role {role} does not exist!";
-
-            return _application.SetRole(role);
+            return clientContainer.SetUserRole(role);
         }
 
         public string GetHelp()
         {
-            return $"{GetName()}(Role)";
+            return $"{GetName()}(UserRole)";
         }
 
         public string GetName()

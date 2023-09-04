@@ -23,7 +23,7 @@
                 $"Name -> {Name} \n " +
                 $"Price -> {Price} \n " +
                 $"Quantity -> {Quantity} \n " +
-                $"Description -> {Description}";
+                $"Description -> {Description}\n";
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using ShoppingCartMultiUser.services;
+﻿using ShoppingCartMultiUser.server;
+using ShoppingCartMultiUser.services;
 using ShoppingCartMultiUser.utils;
 
 namespace ShoppingCartMultiUser.commands.customer
@@ -13,7 +14,7 @@ namespace ShoppingCartMultiUser.commands.customer
             _application = application;
         }
 
-        public string Execute(string[] args)
+        public string Execute(string[] args, ClientContainer clientContainer)
         {
             return _application.GetShoppingCartService().Checkout();
         }

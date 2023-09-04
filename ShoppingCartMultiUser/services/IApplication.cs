@@ -1,19 +1,21 @@
-﻿using ShoppingCartMultiUser.utils;
+﻿using ShoppingCartMultiUser.entity;
 
 namespace ShoppingCartMultiUser.services
 {
     internal interface IApplication
     {
-        string Run(string input);
-        void Exit();
-        IDatabaseService GetDatabaseService();
-        IShoppingCartService GetShoppingCartService();
+        public void Exit();
 
-        //List<CommandItem> GetCommands();
+        public IDatabaseService GetDatabaseService();
 
-        UserRole GetRole();
-        string SetRole(UserRole role);
+        public IShoppingCartService GetShoppingCartService();
 
-        void PrintMessage(string msg);
+        public string GetFilePath();
+
+        public void SetFilePath(string filePath);
+
+        public List<Product> GetProducts();
+        
+        public Dictionary<string, ICommand> GetCommands();
     }
 }

@@ -1,4 +1,5 @@
-﻿using ShoppingCartMultiUser.services;
+﻿using ShoppingCartMultiUser.server;
+using ShoppingCartMultiUser.services;
 using ShoppingCartMultiUser.utils;
 
 namespace ShoppingCartMultiUser.commands.customer
@@ -13,9 +14,11 @@ namespace ShoppingCartMultiUser.commands.customer
             _application = application;
         }
 
-        public string Execute(string[] args)
+        public string Execute(string[] args, ClientContainer clientContainer)
         {
-            return _application.GetCartItems().Count() == 0 ? "There is no products in your shopping cart!" : _application.GetShoppingCartService().ListCartItems();
+            return _application.GetShoppingCartService().GetCartItems().Count() == 0 ?
+                "There is no products in your shopping cart!" : 
+                _application.GetShoppingCartService().ListCartItems(clientContainer.GetClientId());
         }
 
         public string GetHelp()

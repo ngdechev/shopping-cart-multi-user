@@ -7,25 +7,36 @@ namespace ShoppingCartMultiUser
 {
     internal class ServerHandler
     {
+        public readonly object _clientsLock;
+        
         private TcpListener? _listener;
-        private List<ClientHandler> _connectedClients = new();
-        private readonly object _clientsLock = new();
-        private bool _isRunning = true;
-        private int _clientId = 0;
-        private ClientContainer _clientContainer;
-        private Application _application;
+        private ClientHandler _clientHandler;
+        public Application _application;
+        private List<ClientHandler> _connectedClients;
+        private ProductDatabaseService _productDatabaseService;
 
-        Dictionary<int, ShoppingCartService> clientShoppingCarts = new Dictionary<int, ShoppingCartService>();
+        private bool _isRunning;
+        private int _clientId;
 
+        public ServerHandler()
+        {
+            _clientId = 0;
 
-        public void Start()
+            _connectedClients = new();
+            _clientsLock = new();
+            _isRunning = true;
+            _application = new();
+            _productDatabaseService = new(_application);
+            
+            _productDatabaseService.Init();
+        }
+
+        public void Start(int serverPort)
         {  
-            _listener = new(IPAddress.Any, 12345);
+            _listener = new(IPAddress.Any, serverPort);
             _listener.Start();
 
             Console.WriteLine("Server started, waiting for clients...");
-
-            _application = new();
 
             while (_isRunning)
             {
@@ -35,22 +46,16 @@ namespace ShoppingCartMultiUser
 
                     Console.WriteLine("Client connected!");
 
-                    ClientHandler _clientHandler = new(clientSocket, this, _clientId);
+                    _clientHandler = new(clientSocket, this, _clientId);
 
                     lock (_clientsLock)
                     {
-                        _connectedClients.Add(_clientHandler);
-                        _clientContainer = new(_application);
-
-                        ShoppingCartService newCart = new(_application, _clientId);
-                        clientShoppingCarts[_clientId] = newCart;
-
                         _clientId++;
-                        //_shoppingCartMap.Add(_clientId, )
+                        _connectedClients.Add(_clientHandler);
                     }
-                        
 
-                    Thread clientThread = new Thread(_clientHandler.HandleClient);
+                    Thread clientThread = new(_clientHandler.HandleClient);
+
                     clientThread.Start();
                 }
 
@@ -71,25 +76,24 @@ namespace ShoppingCartMultiUser
                 }
             }
 
+            _application.GetDatabaseService().Cleanup();
+
             _listener?.Stop();
 
-            Console.WriteLine("Server stopped! All the clients are disconnected!");
+            _clientHandler.BroadcastMessage("Server stopped! All the clients are disconnected!");
 
             _isRunning = false;
-        }
-
-        public void BroadcastMessage(string message, ClientHandler senderClient)
-        {
-            lock (_clientsLock)
-                foreach (ClientHandler client in _connectedClients)
-                    if (client != senderClient)
-                        client.SendMessage(message);
         }
 
         public void RemoveClient(ClientHandler client)
         {
             lock (_clientsLock)
                 _connectedClients.Remove(client);
+        }
+
+        public int GetClientId()
+        {
+            return _clientId;
         }
     }
 }

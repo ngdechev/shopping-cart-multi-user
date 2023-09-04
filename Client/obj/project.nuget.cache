@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "dW/u1SHAEF+ZiPGBBDIRXK6DLV8JcZ7WWYCZFs0pdnMV1XZOobt6D1KhTI2jqn7uT80MoZFjUI4VyWmxDvTGtQ==",
+  "dgSpecHash": "rTPMdnQUFEazwPNjVsfnss11txTohk7fpGIr3XrvMeHy4Fmkh83Cyp6lqzdFm1hQSJdgLye6J2AZxCBAWRD83A==",
   "success": true,
-  "projectFilePath": "D:\\Projects\\ShoppingCartMultiUser\\ShoppingCartTCPIPConnectionProjectCustomCommandParser\\ShoppingCartMultiUser\\Client\\Client.csproj",
+  "projectFilePath": "C:\\Users\\Personal Computer\\Desktop\\ShoppingCartMultiUser\\Client\\Client.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

@@ -1,4 +1,5 @@
-﻿using ShoppingCartMultiUser.services;
+﻿using ShoppingCartMultiUser.server;
+using ShoppingCartMultiUser.services;
 using ShoppingCartMultiUser.utils;
 
 namespace ShoppingCartMultiUser.commands.admin
@@ -13,7 +14,7 @@ namespace ShoppingCartMultiUser.commands.admin
             _application = application;
         }
 
-        public string Execute(string[] args)
+        public string Execute(string[] args, ClientContainer clientContainer)
         {
             if (args.Length < 1) 
                 return $"Invalid number of arguments. Usage: {GetHelp()}";

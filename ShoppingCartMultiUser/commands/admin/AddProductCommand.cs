@@ -1,4 +1,5 @@
-﻿using ShoppingCartMultiUser.services;
+﻿using ShoppingCartMultiUser.server;
+using ShoppingCartMultiUser.services;
 using ShoppingCartMultiUser.utils;
 
 namespace ShoppingCartMultiUser.commands.admin
@@ -13,9 +14,10 @@ namespace ShoppingCartMultiUser.commands.admin
             _application = application;
         }
 
-        public string Execute(string[] args)
+        public string Execute(string[] args, ClientContainer clientContainer)
         {
-            if (args.Length < 4) Console.WriteLine($"Invalid number of arguments. Usage: {GetHelp()}");
+            if (args.Length < 4) 
+                Console.WriteLine($"Invalid number of arguments. Usage: {GetHelp()}");
 
             string productName = args[0].Trim();
             float productPrice = float.Parse(args[1].Trim());

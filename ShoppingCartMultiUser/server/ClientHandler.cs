@@ -1,4 +1,5 @@
-﻿using System.Net.Sockets;
+﻿using ShoppingCartMultiUser.server;
+using System.Net.Sockets;
 using System.Text;
 
 namespace ShoppingCartMultiUser
@@ -9,16 +10,17 @@ namespace ShoppingCartMultiUser
         private NetworkStream _stream;
         private ServerHandler _server;
         private Application _application;
-        private int _id;
+        private int _clientId;
 
         public ClientHandler(TcpClient clientSocket, ServerHandler server, int clientId)
         {
             _clientSocket = clientSocket;
             _server = server;
-            _id = clientId;
-
-            _application = new();
+            _clientId = clientId;
+            _application = server._application;
             _stream = clientSocket.GetStream();
+
+            _application.GetShoppingCartService().AddNewClientContainer(new ClientContainer(clientId));
         }
 
         public void HandleClient()
@@ -31,29 +33,27 @@ namespace ShoppingCartMultiUser
                 try { 
                     while((bytesRead = _stream.Read(buffer, 0, buffer.Length)) > 0)
                     {
-                        string message = Encoding.ASCII.GetString(buffer, 0, bytesRead);
-                        Console.WriteLine($"Received: {message}");
-
+                        string message = Encoding.ASCII.GetString(buffer, 0, bytesRead), response = string.Empty;
                         string[] lines = message.Split('\n');
 
-                        if (message != null) { 
-                        
+                        Console.WriteLine($"Received: {message}");
+
+                        if (message != null) 
+                        { 
                             if (lines.Length > 1)
                             {
                                 for (int i = 0; i < lines.Length - 1; i++)
                                 {
                                     string line = lines[i].Trim('\r');
+
                                     Console.WriteLine("Received: " + line);
 
-                                    CommandParser.ParseCommands(_application.GetRole(), line);
+                                    response = CommandParser.ParseCommands(line, _application.GetShoppingCartService().GetClientContainer(_clientId));
                                 }
                             }
                         }
 
-                        string response = _application.Run(message);
-                        SendMessage(response);
-
-                        _server.BroadcastMessage(response, this);
+                        BroadcastMessage(response);
                     }
                 }
                 catch (Exception ex)
@@ -66,12 +66,15 @@ namespace ShoppingCartMultiUser
 
         }
 
-        public void SendMessage(string message)
+        public void BroadcastMessage(string message)
         {
-            byte[] messageBytes = Encoding.ASCII.GetBytes(message);
+            lock (_server._clientsLock)
+            {
+                byte[] messageBytes = Encoding.ASCII.GetBytes(message);
 
-            _stream.Write(messageBytes, 0, messageBytes.Length);
-            _stream.Flush();
+                _stream.Write(messageBytes, 0, messageBytes.Length);
+                _stream.Flush();
+            }
         }
 
         public void Disconnect()
