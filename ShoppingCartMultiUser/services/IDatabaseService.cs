@@ -10,6 +10,6 @@
         public string UpdateProduct(int parsedProductId, string productField, string newValue);
         public string ListProducts();
         public string SearchProducts(string searchTerm);
-        public string UpdateProductQuantity();
+        public string UpdateProductQuantity(int parsedProductId, int parsedProductQuantity);
     }
 }

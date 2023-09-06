@@ -1,52 +1,72 @@
 ﻿
 namespace ShoppingCartMultiUser.utils
 {
-    internal class Logger
+    internal static class Logger
     {
-        private static LogLevel _logLevel = 0;
+        private static int logMsgType = 0;
 
-        public static void SetLogLevel(LogLevel lvl)
+        public static void SetMessageType(string messageType)
         {
-            _logLevel = lvl;
-        }
-
-        public static void Error(string message)
-        {
-            if (_logLevel >= LogLevel.Error)
+            switch (messageType)
             {
-                Message("ERROR", message);
+                case "error":
+                    logMsgType = (int)LogLevel.Error;
+                    break;
+                case "warn":
+                    logMsgType = (int)LogLevel.Warning;
+                    break;
+                case "info":
+                    logMsgType = (int)LogLevel.Info; ;
+                    break;
+                case "debug":
+                    logMsgType = (int)LogLevel.Debug;
+                    break;
+                default:
+                    logMsgType = 0;
+                    break;
             }
         }
 
-        public static void Warn(string message)
+        public static void Log(string messageType, string message)
         {
-            if (_logLevel >= LogLevel.Warning)
+            int msgType;
+
+            switch (messageType)
             {
-                Message("WARN", message);
+                case "error":
+                    msgType = 0;
+                    break;
+                case "warn":
+                    msgType = 1;
+                    break;
+                case "info":
+                    msgType = 2;
+                    break;
+                case "debug":
+                    msgType = 3;
+                    break;
+                default:
+                    msgType = 0;
+                    break;
+            }
+            if (msgType <= logMsgType)
+                SaveToFile(messageType, message);
+        }
+
+        private static void SaveToFile(string msgType, string message)
+        {
+            string logFilePath = "logger.log";
+            string logInformation = $"[{DateTime.Now.ToString()}][{msgType.ToUpper()}] -> {message}\n";
+
+            try
+            {
+                File.AppendAllText(logFilePath, logInformation);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occurred: " + ex.Message);
             }
         }
 
-        public static void Info(string message)
-        {
-            if (_logLevel >= LogLevel.Info)
-            {
-                Message("INFO", message);
-            }
-        }
-
-        public static void Debug(string message)
-        {
-            if (_logLevel >= LogLevel.Debug)
-            {
-                Message("DEBUG", message);
-            }
-        }
-
-        private static void Message(string severity, string msg)
-        {
-            var timestamp = DateTime.Now;
-
-            Console.WriteLine($"[{timestamp}] [{severity}] {msg}");
-        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using ShoppingCartMultiUser.commands.admin;
 using ShoppingCartMultiUser.commands.customer;
 using ShoppingCartMultiUser.commands.none;
+using ShoppingCartMultiUser.commands.other;
 using ShoppingCartMultiUser.entity;
 using ShoppingCartMultiUser.server;
 using ShoppingCartMultiUser.services;
@@ -27,15 +28,19 @@ namespace ShoppingCartMultiUser
             _commands = new()
             {
                 { "AddProduct", new AddProductCommand(this) },
-                { "DeleteProduct", new AddProductCommand(this) },
-                { "EditProduct", new AddProductCommand(this) },
-                { "ListProduct", new ListProductsCommand(this) },
+                { "DeleteProduct", new DeleteProductCommand(this) },
+                { "EditProduct", new EditProductCommand(this) },
+                { "ListProducts", new ListProductsCommand(this) },
 
                 // Customer Commands
                 { "AddCartItem", new AddCartItemCommand(this) },
                 { "RemoveCartItem", new RemoveCartItemCommand(this) },
                 { "UpdateCartItemQuantity", new UpdateCartItemQuantityCommand(this) },
                 { "ListCartItems", new ListCartItemsCommand(this) },
+                { "Checkout", new CheckoutCommand(this) },
+
+                // Other
+                { "UpdateProductQuantity", new UpdateProductQuantity(this) },
 
                 // None role commands
                 { "Exit", new ExitCommand(this) },

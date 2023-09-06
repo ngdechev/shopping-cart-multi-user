@@ -7,15 +7,15 @@ namespace ShoppingCartMultiUser
     internal class ProductDatabaseService : IDatabaseService
     {
         private Application _app;
-        private List<Product>? _products = new List<Product>();
+        private List<Product>? _products;
         private string _filePath;
         private int _productId;
 
         public ProductDatabaseService(Application app)
         {
             _app = app;
-            //_products = _app.GetProducts();
-            _products = new();
+            _products = _app.GetProducts();
+            //_products = new();
             _filePath = _app.GetFilePath();
             
             _productId = 0;
@@ -149,9 +149,16 @@ namespace ShoppingCartMultiUser
             return $"Value for [{fieldToEdit}] was changed to [{newValue}]!";
         }
 
-        public string UpdateProductQuantity()
+        public string UpdateProductQuantity(int productId, int productQuantity)
         {
-            return "";
+            Product? productToEdit = GetProductById(productId);
+
+            if (productToEdit == null)
+                return $"Product with ID of {productId} was not found!";
+
+            productToEdit.Quantity = productQuantity;
+
+            return $"Product quantity is set to {productQuantity}.";
         }
 
         public Product GetProductById(int productId)

@@ -65,27 +65,40 @@ namespace ShoppingCartMultiUser.services
 
         public string ListCartItems(int client_id)
         {
-            foreach (CartItem cartItem in _cartItems)
-                if (_cartItems.Count != 0)
-                    return cartItem.ToString();
-
             foreach (var c in _clientContainers)
-            {
                 if (c.GetClientId() == client_id)
-                {
-                   if(c.GetShoppingCart().Count != 0)
-                    {
+                    if (c.GetShoppingCart().Count != 0)
                         return c.GetShoppingCart().ToString();
-                    }
-                }
-            }
 
             return "The product list is empty!";
         }
 
-        public string Checkout()
+        public string Checkout(int clientId)
         {
-            throw new NotImplementedException(); 
+            float totalPrice = 0;
+
+            foreach (var c in _clientContainers)
+                if (c.GetClientId() == clientId)
+                {
+                    if (c.GetShoppingCart().Count != 0)
+                    {
+                        foreach (var cartItem in c.GetShoppingCart())
+                        {
+                            Product product = GetProductById(cartItem.ProductId);
+
+                            if (product != null)
+                            {
+                                totalPrice += product.Price * cartItem.Quantity;
+
+                                c.GetShoppingCart().Clear();
+
+                                return $"Your final price is: {totalPrice}";
+                            }
+                        }
+                    }
+                }
+
+            return "Sorry, there is no items in your shopping cart!";
         }
 
         public void AddNewClientContainer( ClientContainer clientContainer)
@@ -111,6 +124,7 @@ namespace ShoppingCartMultiUser.services
 
             return cartItem;
         }
+
         public ClientContainer GetClientContainer(int clientId)
         {
             foreach(ClientContainer clientContainer in _clientContainers)
@@ -122,6 +136,5 @@ namespace ShoppingCartMultiUser.services
             }
             return null;
         }
-        
     }
 }

@@ -16,7 +16,7 @@ namespace ShoppingCartMultiUser.commands.admin
 
         public string Execute(string[] args, ClientContainer clientContainer)
         {
-            if (args.Length == 3)
+            if (args.Length != 3)
                 return $"Invalid number of arguments. Usage: {GetHelp()}";
             
             int productId = int.Parse(args[0].Trim());
@@ -34,7 +34,7 @@ namespace ShoppingCartMultiUser.commands.admin
         }
         public string GetHelp()
         {
-            return $"{GetName()}([productId], \"fieldToEdit\")";
+            return $"{GetName()}([productId]; \"fieldToEdit\"; \"newValue\")";
         }
 
         public string GetName()

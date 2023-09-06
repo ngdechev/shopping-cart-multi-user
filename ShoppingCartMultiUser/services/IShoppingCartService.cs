@@ -7,13 +7,13 @@ namespace ShoppingCartMultiUser.services
     {
         public string AddCartItem(int id, int productId, int productQuantity);
 
-        public string RemoveCartItem(int client_id, int itemId);
+        public string RemoveCartItem(int clientId, int itemId);
         
         public string UpdateCartItemQuantity(int cartItemId, int newQuantity);
         
-        public string ListCartItems(int client_id);
+        public string ListCartItems(int clientId);
         
-        public string Checkout();
+        public string Checkout(int clientId);
 
         public List<CartItem> GetCartItems();
         

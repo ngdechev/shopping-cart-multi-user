@@ -16,7 +16,7 @@ namespace ShoppingCartMultiUser.commands.customer
 
         public string Execute(string[] args, ClientContainer clientContainer)
         {
-            return _application.GetShoppingCartService().Checkout();
+            return _application.GetShoppingCartService().Checkout(clientContainer.GetClientId());
         }
 
         public string GetHelp()
