@@ -1,0 +1,60 @@
+D:\Projects\ShoppingCartMultiUser\ShoppingCartTCPIPConnectionProjectCustomCommandParser\ShoppingCartMultiUser\Client\bin\Debug\net6.0\Client.exe
+D:\Projects\ShoppingCartMultiUser\ShoppingCartTCPIPConnectionProjectCustomCommandParser\ShoppingCartMultiUser\Client\bin\Debug\net6.0\Client.deps.json
+D:\Projects\ShoppingCartMultiUser\ShoppingCartTCPIPConnectionProjectCustomCommandParser\ShoppingCartMultiUser\Client\bin\Debug\net6.0\Client.runtimeconfig.json
+D:\Projects\ShoppingCartMultiUser\ShoppingCartTCPIPConnectionProjectCustomCommandParser\ShoppingCartMultiUser\Client\bin\Debug\net6.0\Client.dll
+D:\Projects\ShoppingCartMultiUser\ShoppingCartTCPIPConnectionProjectCustomCommandParser\ShoppingCartMultiUser\Client\bin\Debug\net6.0\Client.pdb
+D:\Projects\ShoppingCartMultiUser\ShoppingCartTCPIPConnectionProjectCustomCommandParser\ShoppingCartMultiUser\Client\obj\Debug\net6.0\Client.csproj.AssemblyReference.cache
+D:\Projects\ShoppingCartMultiUser\ShoppingCartTCPIPConnectionProjectCustomCommandParser\ShoppingCartMultiUser\Client\obj\Debug\net6.0\Client.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\ShoppingCartMultiUser\ShoppingCartTCPIPConnectionProjectCustomCommandParser\ShoppingCartMultiUser\Client\obj\Debug\net6.0\Client.AssemblyInfoInputs.cache
+D:\Projects\ShoppingCartMultiUser\ShoppingCartTCPIPConnectionProjectCustomCommandParser\ShoppingCartMultiUser\Client\obj\Debug\net6.0\Client.AssemblyInfo.cs
+D:\Projects\ShoppingCartMultiUser\ShoppingCartTCPIPConnectionProjectCustomCommandParser\ShoppingCartMultiUser\Client\obj\Debug\net6.0\Client.csproj.CoreCompileInputs.cache
+D:\Projects\ShoppingCartMultiUser\ShoppingCartTCPIPConnectionProjectCustomCommandParser\ShoppingCartMultiUser\Client\obj\Debug\net6.0\Client.dll
+D:\Projects\ShoppingCartMultiUser\ShoppingCartTCPIPConnectionProjectCustomCommandParser\ShoppingCartMultiUser\Client\obj\Debug\net6.0\refint\Client.dll
+D:\Projects\ShoppingCartMultiUser\ShoppingCartTCPIPConnectionProjectCustomCommandParser\ShoppingCartMultiUser\Client\obj\Debug\net6.0\Client.pdb
+D:\Projects\ShoppingCartMultiUser\ShoppingCartTCPIPConnectionProjectCustomCommandParser\ShoppingCartMultiUser\Client\obj\Debug\net6.0\Client.genruntimeconfig.cache
+D:\Projects\ShoppingCartMultiUser\ShoppingCartTCPIPConnectionProjectCustomCommandParser\ShoppingCartMultiUser\Client\obj\Debug\net6.0\ref\Client.dll
+C:\Users\LocalUser\Desktop\ShoppingCartMultiUser\Client\bin\Debug\net6.0\Client.exe
+C:\Users\LocalUser\Desktop\ShoppingCartMultiUser\Client\bin\Debug\net6.0\Client.deps.json
+C:\Users\LocalUser\Desktop\ShoppingCartMultiUser\Client\bin\Debug\net6.0\Client.runtimeconfig.json
+C:\Users\LocalUser\Desktop\ShoppingCartMultiUser\Client\bin\Debug\net6.0\Client.dll
+C:\Users\LocalUser\Desktop\ShoppingCartMultiUser\Client\bin\Debug\net6.0\Client.pdb
+C:\Users\LocalUser\Desktop\ShoppingCartMultiUser\Client\obj\Debug\net6.0\Client.csproj.AssemblyReference.cache
+C:\Users\LocalUser\Desktop\ShoppingCartMultiUser\Client\obj\Debug\net6.0\Client.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\LocalUser\Desktop\ShoppingCartMultiUser\Client\obj\Debug\net6.0\Client.AssemblyInfoInputs.cache
+C:\Users\LocalUser\Desktop\ShoppingCartMultiUser\Client\obj\Debug\net6.0\Client.AssemblyInfo.cs
+C:\Users\LocalUser\Desktop\ShoppingCartMultiUser\Client\obj\Debug\net6.0\Client.csproj.CoreCompileInputs.cache
+C:\Users\LocalUser\Desktop\ShoppingCartMultiUser\Client\obj\Debug\net6.0\Client.dll
+C:\Users\LocalUser\Desktop\ShoppingCartMultiUser\Client\obj\Debug\net6.0\refint\Client.dll
+C:\Users\LocalUser\Desktop\ShoppingCartMultiUser\Client\obj\Debug\net6.0\Client.pdb
+C:\Users\LocalUser\Desktop\ShoppingCartMultiUser\Client\obj\Debug\net6.0\Client.genruntimeconfig.cache
+C:\Users\LocalUser\Desktop\ShoppingCartMultiUser\Client\obj\Debug\net6.0\ref\Client.dll
+C:\Users\Personal Computer\Desktop\ShoppingCartMultiUser\Client\bin\Debug\net6.0\Client.exe
+C:\Users\Personal Computer\Desktop\ShoppingCartMultiUser\Client\bin\Debug\net6.0\Client.deps.json
+C:\Users\Personal Computer\Desktop\ShoppingCartMultiUser\Client\bin\Debug\net6.0\Client.runtimeconfig.json
+C:\Users\Personal Computer\Desktop\ShoppingCartMultiUser\Client\bin\Debug\net6.0\Client.dll
+C:\Users\Personal Computer\Desktop\ShoppingCartMultiUser\Client\bin\Debug\net6.0\Client.pdb
+C:\Users\Personal Computer\Desktop\ShoppingCartMultiUser\Client\obj\Debug\net6.0\Client.csproj.AssemblyReference.cache
+C:\Users\Personal Computer\Desktop\ShoppingCartMultiUser\Client\obj\Debug\net6.0\Client.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Personal Computer\Desktop\ShoppingCartMultiUser\Client\obj\Debug\net6.0\Client.AssemblyInfoInputs.cache
+C:\Users\Personal Computer\Desktop\ShoppingCartMultiUser\Client\obj\Debug\net6.0\Client.AssemblyInfo.cs
+C:\Users\Personal Computer\Desktop\ShoppingCartMultiUser\Client\obj\Debug\net6.0\Client.csproj.CoreCompileInputs.cache
+C:\Users\Personal Computer\Desktop\ShoppingCartMultiUser\Client\obj\Debug\net6.0\Client.dll
+C:\Users\Personal Computer\Desktop\ShoppingCartMultiUser\Client\obj\Debug\net6.0\refint\Client.dll
+C:\Users\Personal Computer\Desktop\ShoppingCartMultiUser\Client\obj\Debug\net6.0\Client.pdb
+C:\Users\Personal Computer\Desktop\ShoppingCartMultiUser\Client\obj\Debug\net6.0\Client.genruntimeconfig.cache
+C:\Users\Personal Computer\Desktop\ShoppingCartMultiUser\Client\obj\Debug\net6.0\ref\Client.dll
+C:\Users\LocalUser\Desktop\shopping-cart-multi-user-dev\Client\bin\Debug\net6.0\Client.exe
+C:\Users\LocalUser\Desktop\shopping-cart-multi-user-dev\Client\bin\Debug\net6.0\Client.deps.json
+C:\Users\LocalUser\Desktop\shopping-cart-multi-user-dev\Client\bin\Debug\net6.0\Client.runtimeconfig.json
+C:\Users\LocalUser\Desktop\shopping-cart-multi-user-dev\Client\bin\Debug\net6.0\Client.dll
+C:\Users\LocalUser\Desktop\shopping-cart-multi-user-dev\Client\bin\Debug\net6.0\Client.pdb
+C:\Users\LocalUser\Desktop\shopping-cart-multi-user-dev\Client\obj\Debug\net6.0\Client.csproj.AssemblyReference.cache
+C:\Users\LocalUser\Desktop\shopping-cart-multi-user-dev\Client\obj\Debug\net6.0\Client.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\LocalUser\Desktop\shopping-cart-multi-user-dev\Client\obj\Debug\net6.0\Client.AssemblyInfoInputs.cache
+C:\Users\LocalUser\Desktop\shopping-cart-multi-user-dev\Client\obj\Debug\net6.0\Client.AssemblyInfo.cs
+C:\Users\LocalUser\Desktop\shopping-cart-multi-user-dev\Client\obj\Debug\net6.0\Client.csproj.CoreCompileInputs.cache
+C:\Users\LocalUser\Desktop\shopping-cart-multi-user-dev\Client\obj\Debug\net6.0\Client.dll
+C:\Users\LocalUser\Desktop\shopping-cart-multi-user-dev\Client\obj\Debug\net6.0\refint\Client.dll
+C:\Users\LocalUser\Desktop\shopping-cart-multi-user-dev\Client\obj\Debug\net6.0\Client.pdb
+C:\Users\LocalUser\Desktop\shopping-cart-multi-user-dev\Client\obj\Debug\net6.0\Client.genruntimeconfig.cache
+C:\Users\LocalUser\Desktop\shopping-cart-multi-user-dev\Client\obj\Debug\net6.0\ref\Client.dll
